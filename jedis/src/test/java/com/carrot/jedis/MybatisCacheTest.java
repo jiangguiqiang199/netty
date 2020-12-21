@@ -2,9 +2,11 @@ package com.carrot.jedis;
 
 import com.carrot.jedis.dao.LockTableMapper;
 import com.carrot.jedis.model.LockTable;
+import com.carrot.jedis.service.MybatisService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
@@ -89,32 +91,19 @@ import javax.annotation.Resource;
 @SpringBootTest
 public class MybatisCacheTest {
 
-    @Resource
-    private LockTableMapper lockTableMapper;
+    @Autowired
+    private MybatisService mybatisService;
 
     @Test
     public void testInsert(){
-        LockTable lockTable=new LockTable();
-//        lockTable.setRowKey("12222222");
-        lockTable.setRowKey("12222223");
-        lockTable.setBranchId(12343124124143L);
-        int count = lockTableMapper.insert(lockTable);
-        log.info("【影响行数:{}】",count);
+        mybatisService.insertObject();
     }
 
     // 一级缓存(sqlSession级别的缓存,默认开启)试验
     @Test
 //    @Transactional
     public void testCacheLevel1(){
-        String key = "12222222";
-        // 会打印SQL
-        LockTable lockTable01 = lockTableMapper.selectByPrimaryKey(key);
-        log.info("【lockTable01:{}】",lockTable01);
-        // 不会打印SQL
-        LockTable lockTable02 = lockTableMapper.selectByPrimaryKey(key);
-        log.info("【lockTable02:{}】",lockTable02);
-        // lockTable01 和 lockTable02 内存地址一致
-        log.info("【lockTable01与lockTable02是同一个对象吗：{}】",lockTable01 == lockTable02);
+        mybatisService.selectObject();
     }
 
     // 二级缓存试验(sqlSessionFactory级别的缓存)试验

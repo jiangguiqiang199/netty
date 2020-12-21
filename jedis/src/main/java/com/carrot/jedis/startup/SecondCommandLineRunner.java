@@ -16,6 +16,6 @@ public class SecondCommandLineRunner implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
          // 模拟springboot启动banner
-        log.info("\u001B[32m >> startup second runner <<<");
+//        log.info("\u001B[32m >> startup second runner <<<");
     }
 }

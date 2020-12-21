@@ -12,7 +12,6 @@ import org.springframework.stereotype.Component;
  * @Author: Created by carrot
  * 2020/12/15 17:09
  */
-@Component
 public class MyDog implements BeanDefinitionRegistryPostProcessor {
 
     @Override

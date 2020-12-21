@@ -2,15 +2,18 @@ package com.carrot.jedis;
 
 import com.carrot.jedis.listener.StartApplicationMainInitializer;
 import com.carrot.jedis.listener.StartApplicationMainListener;
+import com.carrot.jedis.processor.MyBeanImporter;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.PropertySource;
 
 import java.util.Properties;
 
 //@PropertySource({"demo.properties"})
 @SpringBootApplication
+@Import(MyBeanImporter.class)
 @MapperScan({"com.carrot.jedis.dao"})
 public class JedisApplication {
 

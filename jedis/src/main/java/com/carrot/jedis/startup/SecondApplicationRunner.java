@@ -17,6 +17,6 @@ public class SecondApplicationRunner implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
         // 模拟springboot启动banner
-        log.info("\u001B[32m >> startup second application runner <<<");
+//        log.info("\u001B[32m >> startup second application runner <<<");
     }
 }
