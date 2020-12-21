@@ -1,0 +1,5 @@
+# jiang: application.yml
+weather:
+  enable: true
+  type: snow
+  rate: serious

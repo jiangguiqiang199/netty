@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.carrot.jedis.dao.LockTableMapper">
+    <cache type="com.carrot.jedis.cache.RedisCache">
+        <property name="nodes" value="182.92.231.165:8001, 182.92.231.165:8002, 182.92.231.165:8003, 182.92.231.165:8004, 182.92.231.165:8005, 182.92.231.165:8000, 182.92.231.165:8006, 182.92.231.165:8007"/>
+        <property name="commandTimeout" value="500"/>
+    </cache>
+  <resultMap id="BaseResultMap" type="com.carrot.jedis.model.LockTable">
+    <id column="row_key" jdbcType="VARCHAR" property="rowKey" />
+    <result column="xid" jdbcType="VARCHAR" property="xid" />
+    <result column="transaction_id" jdbcType="BIGINT" property="transactionId" />
+    <result column="branch_id" jdbcType="BIGINT" property="branchId" />
+    <result column="resource_id" jdbcType="VARCHAR" property="resourceId" />
+    <result column="table_name" jdbcType="VARCHAR" property="tableName" />
+    <result column="pk" jdbcType="VARCHAR" property="pk" />
+    <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
+    <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    row_key, xid, transaction_id, branch_id, resource_id, table_name, pk, gmt_create, 
+    gmt_modified
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from lock_table
+    where row_key = #{rowKey,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from lock_table
+    where row_key = #{rowKey,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.carrot.jedis.model.LockTable">
+    insert into lock_table (row_key, xid, transaction_id, 
+      branch_id, resource_id, table_name, 
+      pk, gmt_create, gmt_modified
+      )
+    values (#{rowKey,jdbcType=VARCHAR}, #{xid,jdbcType=VARCHAR}, #{transactionId,jdbcType=BIGINT}, 
+      #{branchId,jdbcType=BIGINT}, #{resourceId,jdbcType=VARCHAR}, #{tableName,jdbcType=VARCHAR}, 
+      #{pk,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.carrot.jedis.model.LockTable">
+    insert into lock_table
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="rowKey != null">
+        row_key,
+      </if>
+      <if test="xid != null">
+        xid,
+      </if>
+      <if test="transactionId != null">
+        transaction_id,
+      </if>
+      <if test="branchId != null">
+        branch_id,
+      </if>
+      <if test="resourceId != null">
+        resource_id,
+      </if>
+      <if test="tableName != null">
+        table_name,
+      </if>
+      <if test="pk != null">
+        pk,
+      </if>
+      <if test="gmtCreate != null">
+        gmt_create,
+      </if>
+      <if test="gmtModified != null">
+        gmt_modified,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="rowKey != null">
+        #{rowKey,jdbcType=VARCHAR},
+      </if>
+      <if test="xid != null">
+        #{xid,jdbcType=VARCHAR},
+      </if>
+      <if test="transactionId != null">
+        #{transactionId,jdbcType=BIGINT},
+      </if>
+      <if test="branchId != null">
+        #{branchId,jdbcType=BIGINT},
+      </if>
+      <if test="resourceId != null">
+        #{resourceId,jdbcType=VARCHAR},
+      </if>
+      <if test="tableName != null">
+        #{tableName,jdbcType=VARCHAR},
+      </if>
+      <if test="pk != null">
+        #{pk,jdbcType=VARCHAR},
+      </if>
+      <if test="gmtCreate != null">
+        #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null">
+        #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.carrot.jedis.model.LockTable">
+    update lock_table
+    <set>
+      <if test="xid != null">
+        xid = #{xid,jdbcType=VARCHAR},
+      </if>
+      <if test="transactionId != null">
+        transaction_id = #{transactionId,jdbcType=BIGINT},
+      </if>
+      <if test="branchId != null">
+        branch_id = #{branchId,jdbcType=BIGINT},
+      </if>
+      <if test="resourceId != null">
+        resource_id = #{resourceId,jdbcType=VARCHAR},
+      </if>
+      <if test="tableName != null">
+        table_name = #{tableName,jdbcType=VARCHAR},
+      </if>
+      <if test="pk != null">
+        pk = #{pk,jdbcType=VARCHAR},
+      </if>
+      <if test="gmtCreate != null">
+        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null">
+        gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where row_key = #{rowKey,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.carrot.jedis.model.LockTable">
+    update lock_table
+    set xid = #{xid,jdbcType=VARCHAR},
+      transaction_id = #{transactionId,jdbcType=BIGINT},
+      branch_id = #{branchId,jdbcType=BIGINT},
+      resource_id = #{resourceId,jdbcType=VARCHAR},
+      table_name = #{tableName,jdbcType=VARCHAR},
+      pk = #{pk,jdbcType=VARCHAR},
+      gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP}
+    where row_key = #{rowKey,jdbcType=VARCHAR}
+  </update>
+</mapper>

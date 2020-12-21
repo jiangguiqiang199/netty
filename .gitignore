@@ -1,3 +1,12 @@
 
 .idea/
 websocket/*.iml
+nettysourcecode/*.iml
+classloader/*.iml
+*/mvnw*
+mvnw
+pool/target/
+weather/mvnw
+.mvn/
+pool/pool.iml
+jvm/jvm.iml

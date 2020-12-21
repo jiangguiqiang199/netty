@@ -1,0 +1,14 @@
+org.springframework.context.ApplicationListener=com.carrot.jedis.listener.ApplicationStartingEventListener\
+  ,com.carrot.jedis.listener.ApplicationEnvironmentPreparedEventListener\
+  ,com.carrot.jedis.listener.ApplicationContextInitializedEventListener\
+  ,com.carrot.jedis.listener.BootstrapContextClosedEventListener\
+  ,com.carrot.jedis.listener.ApplicationPreparedEventListener\
+  ,com.carrot.jedis.listener.ContextRefreshedEventListener\
+  ,com.carrot.jedis.listener.ApplicationStartedEventListener\
+  ,com.carrot.jedis.listener.ApplicationReadyEventListener
+
+# org.springframework.context.ApplicationListener=com.carrot.jedis.listener.StartApplicationListener
+
+# org.springframework.boot.Bootstrapper=com.carrot.jedis.listener.StartApplicationBootstrapper
+
+# org.springframework.boot.SpringApplicationRunListener=com.carrot.jedis.trigger.MyEventPublishingRunListener
