@@ -1,7 +1,5 @@
 package com.carrot.jedis;
 
-import com.carrot.jedis.dao.LockTableMapper;
-import com.carrot.jedis.model.LockTable;
 import com.carrot.jedis.service.MybatisService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
@@ -9,9 +7,6 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.transaction.annotation.Transactional;
-
-import javax.annotation.Resource;
 
 /**
  * ==========================一级缓存==========================================================
@@ -104,6 +99,7 @@ public class MybatisCacheTest {
 //    @Transactional
     public void testCacheLevel1(){
         mybatisService.selectObject();
+        System.out.println();
     }
 
     // 二级缓存试验(sqlSessionFactory级别的缓存)试验

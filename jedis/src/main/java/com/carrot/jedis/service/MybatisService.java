@@ -3,6 +3,9 @@ package com.carrot.jedis.service;
 import com.carrot.jedis.dao.LockTableMapper;
 import com.carrot.jedis.model.LockTable;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -13,10 +16,12 @@ import javax.annotation.Resource;
  */
 @Slf4j
 @Component
-public class MybatisService {
+public class MybatisService implements BeanFactoryAware {
 
     @Resource
     private LockTableMapper lockTableMapper;
+
+    private BeanFactory beanFactory;
 
 
     public void selectObject(){
@@ -38,5 +43,10 @@ public class MybatisService {
         lockTable.setBranchId(12343124124143L);
         int count = lockTableMapper.insert(lockTable);
         log.info("【影响行数:{}】",count);
+    }
+
+    @Override
+    public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
+        this.beanFactory = beanFactory;
     }
 }

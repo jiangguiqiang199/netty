@@ -6,7 +6,6 @@ import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.BeanDefinitionRegistryPostProcessor;
 import org.springframework.beans.factory.support.RootBeanDefinition;
-import org.springframework.stereotype.Component;
 
 /**
  * @Author: Created by carrot
@@ -16,6 +15,7 @@ public class MyDog implements BeanDefinitionRegistryPostProcessor {
 
     @Override
     public void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry registry) throws BeansException {
+        System.out.println("【调用BeanDefinitionRegistryPostProcessor.registerBeanDefinitions】");
         RootBeanDefinition rootBeanDefinition = new RootBeanDefinition();
         rootBeanDefinition.setBeanClass(Dog.class);
         registry.registerBeanDefinition("dog",rootBeanDefinition);

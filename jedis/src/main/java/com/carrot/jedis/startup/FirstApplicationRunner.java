@@ -7,7 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -41,12 +41,11 @@ public class FirstApplicationRunner implements ApplicationRunner, EnvironmentAwa
         // 模拟springboot启动banner
         log.info("\u001B[32m >> startup first application runner <<<");
         Dog dog = beanFactory.getBean("dog", Dog.class);
-//        if(beanFactory instanceof DefaultListableBeanFactory){
-//            DefaultListableBeanFactory factory = (DefaultListableBeanFactory)beanFactory;
-//            for (String beanDefinitionName : factory.getBeanDefinitionNames()) {
-//                log.info("【factory beanDefinitionName:{}】",beanDefinitionName);
-//            }
-//        }
+        if(beanFactory instanceof DefaultListableBeanFactory){
+            DefaultListableBeanFactory factory = (DefaultListableBeanFactory)beanFactory;
+            BeanDefinition beanDefinition = factory.getBeanDefinition("lockTableMapper");
+            System.out.println();
+        }
         log.info("【存在{}】",Dog.class.getName());
     }
 

@@ -10,3 +10,5 @@ weather/mvnw
 .mvn/
 pool/pool.iml
 jvm/jvm.iml
+proxy/target/
+proxy/proxy.iml
